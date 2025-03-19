@@ -1,6 +1,7 @@
 'use strict'
 
-async function pesquisarFrutas(nome) {
+/**
+ * async function pesquisarFrutas(nome) {
 
     const url = `https://api.api-onepiece.com/v2/fruits/en`
     const response = await fetch(url)
@@ -92,3 +93,4 @@ function criarCards(produto) {
 
     listaProdutos.appendChild(novoCard)
 }
+    **/

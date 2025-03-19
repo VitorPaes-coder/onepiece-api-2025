@@ -4,12 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style-home.css">
+    <link rel="icon" type="image/png" href="./img/jollyRoger.jpg" />
     <script type="module" src="main.js" defer></script>
-    <title>Homepage OnePiece API</title>
+    <title>Home OnePiece API</title>
 </head>
 <body>
-    <input id="search-fruit" type="text">
-    <input id="search-characters" type="text">
-    <div id="search-card"></div>
+    <img id='logo' src="./img/logo.png" alt="">
+    <div id="containers">
+
+        <div class="search-card">
+            <img src="./img/devilFruit.png" alt="">
+
+            <h2>Search for devil fruits</h2>
+
+            <div id="search-box">
+                <button id="search-icon" src="./img/searchIcon.png" ></button>
+                <input id="search-fruit" type="text">
+            </div>
+
+        </div>
+
+        <div class="search-card">
+            <img src="./img/luffy.png" alt="">
+
+            <h2>Search for characters</h2>
+
+            <div id="search-box">
+                <button id="search-icon" src="./img/searchIcon.png" ></button>
+                <input id="search-characters" type="text">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
