@@ -1,0 +1,227 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    padding-top: 18px;
+    padding-left: 200px;
+    padding-right: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+#logo {
+    width: 150px;
+    height: auto;
+    padding: 20px;
+    align-self: center;
+}
+
+/*****************************CSS-HOME***********************************/
+
+#containers {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    z-index: 1;
+}
+
+.search-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border-radius: 30px;
+    width: 490px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.3);
+    gap: 25px;
+    z-index: 2;
+}
+
+.search-card img {
+    width: 100%;
+    height: auto;
+    max-height: 412px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    z-index: 3;
+}
+
+.search-card h2 {
+    font-size: 42px;
+    font-family: "Bangers";
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.change-page {
+    width: 100%;
+    height: 80px;
+    font-family: "Bangers";
+    font-weight: 700;
+    font-size: 48px;
+    border: none;
+    border-radius: 60px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#button1 {
+    background-color: #8d52ff;
+    color: white;
+}
+
+#button2 {
+    background-color: #ffcc00; 
+    color: white;
+}
+
+.change-page:hover {
+    transform: scale(1.05);
+}
+
+#button1:hover{
+    background-color: #a377ff;
+}
+
+#button2:hover {
+    background-color: #ffd633;
+}
+
+/****************************************************************/
+
+#search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 100px;
+    padding-top: 5px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#search-fruit {
+    flex: 1;
+    height: 60px;
+    border: none;
+    border-radius: 60px;
+    text-align: left;
+    font-size: 36px;
+    outline: none;
+    padding-left: 15px;
+    background: transparent;
+}
+
+#search-characters {
+    flex: 1;
+    height: 60px;
+    border: none;
+    border-radius: 60px;
+    text-align: left;
+    font-size: 36px;
+    outline: none;
+    padding-left: 15px;
+    background: transparent;
+}
+
+.search-icon {
+    background: url('./img/searchIcon.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.fruit-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.fruit-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.fruit-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.fruit-description {
+    font-size: 14px;
+    color: white;
+}
+
+/* Estilos para os cards de personagens (pôster WANTED) */
+.character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f7e6b1;
+    border: 3px solid #a67c52;
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+}
+
+.character-card h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #553b08;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.character-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 2px solid #553b08;
+    margin-bottom: 10px;
+}
+
+.bounty {
+    font-size: 18px;
+    font-weight: bold;
+    color: #553b08;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.bounty img {
+    width: 16px;
+    height: 16px;
+}
+
