@@ -1,20 +1,57 @@
 'use strict'
 
 async function pesquisarFrutas(nome) {
-
     const url = `https://api.api-onepiece.com/v2/fruits/en`
     const response = await fetch(url)
     const data = await response.json()
 
     const listaDeFrutas = []
-    data.forEach(function(item) {
+    data.forEach(function (item) {
         if (item.name.includes(nome)) {
             listaDeFrutas.push(item)
         }
     })
-    
+
+    console.log(listaDeFrutas) 
     return listaDeFrutas
 }
+
+async function preencherFrutas() {
+    const fruta = document.getElementById('search-fruit').value
+    const buscaFruta = await pesquisarFrutas(fruta)
+    const galeriaFrutas = document.getElementById('fruits-gallery')
+
+    galeriaFrutas.replaceChildren() 
+
+    buscaFruta.forEach(function (item) {
+        // Criando um novo card para cada fruta
+        const fruitCard = document.createElement('div')
+        fruitCard.id='fruit-card'
+
+        if (item.filename.length > 41) {
+            const img = document.createElement('img')
+            img.src = item.filename
+            img.alt = item.name
+            fruitCard.appendChild(img)
+        }
+
+        const nome = document.createElement('h2')
+        nome.textContent = item.name
+
+        fruitCard.appendChild(nome)
+        galeriaFrutas.appendChild(fruitCard)
+    })
+}
+
+document.getElementById('icon1').addEventListener('click', preencherFrutas)
+
+
+
+
+
+
+
+/*********************GUEDÃO****************************
 
 async function name(params) {
     
@@ -48,8 +85,6 @@ async function preencherFotos() {
     }
 }
 
-/*************************************************/
-
 async function pesquisarinfos(cardId) {
     
     const url = `https://api.codetabs.com/v1/proxy/?quest=https://api.pokemontcg.io/v2/cards?q=id:${cardId}`
@@ -63,6 +98,7 @@ async function pesquisarinfos(cardId) {
         return null
     }
 }
+
 async function preencherinfo(cardId) {
     const infos = await pesquisarinfos(cardId)
     console.log(infos)
@@ -109,7 +145,6 @@ async function preencherinfo(cardId) {
         
         descContainer.appendChild(statusContainer)
 
-        /**************************************************************/
 
         const ataqueContainer=document.createElement('div')
         ataqueContainer.classList.add('ataques')
@@ -136,7 +171,6 @@ async function preencherinfo(cardId) {
         ataqueContainer.appendChild(ataques)
         descContainer.appendChild(ataqueContainer)
 
-        /**************************************************************/
 
         const efeitoContainer=document.createElement('div')
         efeitoContainer.classList.add('especial')
@@ -155,7 +189,7 @@ async function preencherinfo(cardId) {
         efeitoContainer.appendChild(effect)
         descContainer.appendChild(efeitoContainer)
         
-        /**************************************************************/
+
 
         const pontosContainer=document.createElement('div')
         pontosContainer.classList.add('pontos')
@@ -175,7 +209,6 @@ async function preencherinfo(cardId) {
         pontosContainer.appendChild(resistencia);
         descContainer.appendChild(pontosContainer)
 
-        /********************************************************************/
 
         // Adicionando Preço
         const preco = document.createElement('p');
@@ -189,7 +222,11 @@ async function preencherinfo(cardId) {
         console.log("Informações não encontradas");
     }
 }
+document.getElementById('pesquisar').addEventListener('click', preencherFotos)
 
+*/
+
+/*CHATGPT
 const createCharacterCard = (name, bounty) => {
     const card = document.createElement("div");
     card.classList.add("character-card");
@@ -212,5 +249,4 @@ const createCharacterCard = (name, bounty) => {
 
     document.getElementById("characters-container").appendChild(card);
 };
-
-document.getElementById('pesquisar').addEventListener('click', preencherFotos)
+*/
