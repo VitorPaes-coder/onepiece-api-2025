@@ -7,7 +7,7 @@ async function pesquisarFrutas(nome) {
 
     const listaDeFrutas = []
     data.forEach(function (item) {
-        if ((item.roman_name && item.roman_name.includes(nome)) || 
+        if ((item.roman_name && item.roman_name.includes(nome) ) || 
             (item.name && item.name.includes(nome))) {
             listaDeFrutas.push(item)
         }
@@ -41,15 +41,26 @@ async function preencherFrutas() {
             fruitCard.appendChild(img)
         }
 
-        const nome = document.createElement('h2')
-        nome.textContent = item.roman_name
+        if (!item.roman_name) {
+            const nome = document.createElement('h2')
+            nome.textContent = item.name
+            fruitCard.appendChild(nome)
+        }else{
+            const nome = document.createElement('h2')
+            nome.textContent = item.roman_name
+            fruitCard.appendChild(nome)
+        }
 
-        fruitCard.appendChild(nome)
         galeriaFrutas.appendChild(fruitCard)
     })
 }
 
 document.getElementById('icon1').addEventListener('click', preencherFrutas)
+document.getElementById('search-fruit').addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        preencherFrutas()
+    }
+})
 
 /***************************************************************************************/
 
@@ -90,3 +101,8 @@ async function preencherPersonagens() {
 }
 
 document.getElementById('icon2').addEventListener('click', preencherPersonagens)
+document.getElementById('search-characters').addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        preencherPersonagens()
+    }
+})
