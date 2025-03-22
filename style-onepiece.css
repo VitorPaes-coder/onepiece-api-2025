@@ -26,6 +26,7 @@ body {
     height: auto;
     padding: 20px;
     align-self: center;
+    cursor: pointer;
 }
 
 /*****************************CSS-HOME***********************************/
@@ -87,6 +88,22 @@ body {
     color: white;
 }
 
+#button1 a{
+    text-decoration: none;
+    text-decoration-color: white;
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+#button2 a{
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    text-decoration-color: white;
+    color: white;
+}
+
 #button2 {
     background-color: #ffcc00; 
     color: white;
@@ -101,7 +118,7 @@ body {
 }
 
 #button2:hover {
-    background-color: #ffd633;
+    background-color: #ffe375;
 }
 
 /****************************************************************/
@@ -126,6 +143,8 @@ body {
     outline: none;
     padding-left: 15px;
     background: transparent;
+    font-family: "Righteous";
+    color: #4d4d4d;
 }
 
 #search-characters {
@@ -153,39 +172,47 @@ body {
 
 
 #fruits-gallery {
-    columns: 3;
-    flex-direction: column;
-    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;  /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os itens */
     gap: 20px;
     margin-top: 20px;
 }
 
-#fruit-card {
-    width: 450px;
+.fruit-card {
+    width: 350px;
     height: 550px;
     background: #d9d9d97a;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
     color: white;
     font-weight: bold;
-    margin: 10px;
+    margin: 30px;
     padding-bottom: 18px;
+    justify-content: center;
+    align-items: center;
 }
 
-#fruit-card img {
+.fruit-card img {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 40px;
     max-width: 300px;
     align-self: top;;
     justify-content: center;
+    
 }
 
-#fruit-card h2 {
-    
-    bottom: 15px;
+.fruit-card h2 {
+    width: 100%;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    font-size: 18px;
+    font-size: 36px;
+    font-family: "Bangers";
+    padding: 40px;
+    text-align: center;
+    
 }
 
 
