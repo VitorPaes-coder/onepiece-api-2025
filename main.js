@@ -1,30 +1,32 @@
 'use strict'
 
-async function pesquisarFrutas(nome) {
+console.log('main.js successfully loaded')
+
+async function searchFruits(name) {
     const url = `https://api.api-onepiece.com/v2/fruits/en`
     const response = await fetch(url)
     const data = await response.json()
 
-    const listaDeFrutas = []
+    const fruitList = []
     data.forEach(function (item) {
-        if ((item.roman_name && item.roman_name.includes(nome) ) || 
-            (item.name && item.name.includes(nome))) {
-            listaDeFrutas.push(item)
+        if ((item.roman_name && item.roman_name.includes(name)) || 
+            (item.name && item.name.includes(name))) {
+            fruitList.push(item)
         }
     })
 
-    console.log(listaDeFrutas) 
-    return listaDeFrutas
+    console.log(fruitList)
+    return fruitList
 }
 
-async function preencherFrutas() {
-    const fruta = document.getElementById('search-fruit').value
-    const buscaFruta = await pesquisarFrutas(fruta)
-    const galeriaFrutas = document.getElementById('fruits-gallery')
+async function fillFruits() {
+    const fruit = document.getElementById('search-fruit').value
+    const searchFruit = await searchFruits(fruit)
+    const fruitsGallery = document.getElementById('fruits-gallery')
 
-    galeriaFrutas.replaceChildren() 
+    fruitsGallery.replaceChildren()
 
-    buscaFruta.forEach(function (item) {
+    searchFruit.forEach(function (item) {
 
         const fruitCard = document.createElement('div')
         fruitCard.classList.add('fruit-card')
@@ -34,75 +36,161 @@ async function preencherFrutas() {
             img.src = item.filename
             img.alt = item.name
             fruitCard.appendChild(img)
-        }else{
-            //console.log(`Images for ${item.name} haven't been found`);
+        } else {
             const img = document.createElement('img')
             img.src = './img/noImage.png'
             fruitCard.appendChild(img)
         }
 
         if (!item.roman_name) {
-            const nome = document.createElement('h2')
-            nome.textContent = item.name
-            fruitCard.appendChild(nome)
-        }else{
-            const nome = document.createElement('h2')
-            nome.textContent = item.roman_name
-            fruitCard.appendChild(nome)
+            const nameElement = document.createElement('h2')
+            nameElement.textContent = item.name
+            fruitCard.appendChild(nameElement)
+        } else {
+            const nameElement = document.createElement('h2')
+            nameElement.textContent = item.roman_name
+            fruitCard.appendChild(nameElement)
         }
 
-        galeriaFrutas.appendChild(fruitCard)
+        fruitsGallery.appendChild(fruitCard)
     })
 }
 
-document.getElementById('icon1').addEventListener('click', preencherFrutas)
+function setupModal() {
+    const modal = document.getElementById('chosen-fruit')
+    if (!modal) return
+
+    const modalContent = document.createElement('div')
+    modalContent.classList.add('modal-content')
+
+    const closeButton = document.createElement('span')
+    closeButton.classList.add('close')
+    closeButton.textContent = '×'
+
+    const title = document.createElement('h2')
+    title.id = 'modal-title'
+
+    const image = document.createElement('img')
+    image.id = 'modal-image'
+    image.alt = 'Fruit Image'
+
+    const description = document.createElement('p')
+    description.id = 'modal-description'
+
+    const closeBtn = document.createElement('button')
+    closeBtn.classList.add('modal-close-btn')
+    closeBtn.textContent = 'Close'
+
+    closeButton.addEventListener('click', closeModal)
+    closeBtn.addEventListener('click', closeModal)
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal()
+        }
+    })
+
+    modalContent.appendChild(closeButton)
+    modalContent.appendChild(title)
+    modalContent.appendChild(image)
+    modalContent.appendChild(description)
+    modalContent.appendChild(closeBtn)
+
+    modal.replaceChildren(modalContent)
+}
+
+function openFruitModal(fruit) {
+    const modal = document.getElementById('chosen-fruit')
+
+    if (!modal.firstChild) setupModal()
+
+    document.getElementById('modal-title').textContent = fruit.roman_name || fruit.name
+    document.getElementById('modal-image').src = fruit.filename.length > 41 ? fruit.filename : './img/noImage.png'
+    document.getElementById('modal-description').textContent = fruit.description || "Description not found"
+
+    modal.style.display = 'flex'
+}
+
+function closeModal() {
+    const modal = document.getElementById('chosen-fruit')
+    if (modal) {
+        modal.style.display = 'none'
+    }
+}
+
+setupModal()
+document.getElementById('icon1').addEventListener('click', fillFruits)
 document.getElementById('search-fruit').addEventListener('keydown', function(event) {
     if (event.key === "Enter") {
-        preencherFrutas()
+        fillFruits()
     }
 })
 
 /***************************************************************************************/
 
-async function pesquisarPersonagens(nome) {
-    const url = `https://api.api-onepiece.com/v2/characters/en`
-    const response = await fetch(url)
-    const data = await response.json()
+async function searchCharacters(name) {
+    const urlC = `https://api.api-onepiece.com/v2/characters/en`
+    const responseC = await fetch(urlC)
+    const dataC = await responseC.json()
 
-    const listaDePersonagens = []
-    data.forEach(function (item) {
-        if (item.name.includes(nome)) {
-            listaDePersonagens.push(item)
+    const characterList = []
+    dataC.forEach(function (item) {
+        if (item.name.includes(name)) {
+            characterList.push(item)
         }
     })
 
-    console.log(listaDePersonagens) 
-    return listaDePersonagens
+    console.log(characterList)
+    return characterList
 }
 
-async function preencherPersonagens() {
-    const personagem = document.getElementById('search-characters').value
-    const buscaPersonagem = await pesquisarPersonagens(personagem)
-    const galeriaPersonagens = document.getElementById('characters-gallery')
+async function fillCharacters() {
+    console.log('fillCharacters function called')
+    const character = document.getElementById('search-characters').value
+    const searchCharacter = await searchCharacters(character)
+    const charactersGallery = document.getElementById('characters-gallery')
 
-    galeriaPersonagens.replaceChildren() 
+    charactersGallery.replaceChildren()
 
-    buscaPersonagem.forEach(function (item) {
+    searchCharacter.forEach(function (item) {
 
         const characterCard = document.createElement('div')
-        characterCard.id='character-card'
+        characterCard.id = 'character-card'
 
-        const nome = document.createElement('h2')
-        nome.textContent = item.name
+        const nameElement = document.createElement('h2')
+        nameElement.textContent = item.name
 
-        characterCard.appendChild(nome)
-        galeriaPersonagens.appendChild(characterCard)
+        characterCard.appendChild(nameElement)
+        charactersGallery.appendChild(characterCard)
     })
 }
 
-document.getElementById('icon2').addEventListener('click', preencherPersonagens)
-document.getElementById('search-characters').addEventListener('keydown', function(event) {
-    if (event.key === "Enter") {
-        preencherPersonagens()
+function setupEvents(buttonId, inputId, callback) {
+    const button = document.getElementById(buttonId)
+    const input = document.getElementById(inputId)
+
+    if (button) {
+        button.addEventListener('click', callback)
+    }
+
+    if (input) {
+        input.addEventListener('keydown', function (event) {
+            if (event.key === "Enter") {
+                callback()
+            }
+        })
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM fully loaded and parsed')
+
+    if (document.getElementById('icon1')) {
+        console.log('Fruits page detected')
+        setupEvents('icon1', 'search-fruit', fillFruits)
+    }
+
+    if (document.getElementById('icon2')) {
+        console.log('Characters page detected')
+        setupEvents('icon2', 'search-characters', fillCharacters)
     }
 })

@@ -1,3 +1,4 @@
+/***************************** CSS GLOBAL ***********************************/
 * {
     padding: 0;
     margin: 0;
@@ -29,8 +30,7 @@ body {
     cursor: pointer;
 }
 
-/*****************************CSS-HOME***********************************/
-
+/***************************** CSS HOME ***********************************/
 #containers {
     display: flex;
     gap: 30px;
@@ -81,11 +81,16 @@ body {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
 }
 
+
+
 #button1 {
-    background-color: #8d52ff;
-    color: white;
+    background-color: #5735c5;
 }
 
 #button1 a{
@@ -105,8 +110,7 @@ body {
 }
 
 #button2 {
-    background-color: #ffcc00; 
-    color: white;
+    background-color: #fff000; 
 }
 
 .change-page:hover {
@@ -114,11 +118,11 @@ body {
 }
 
 #button1:hover{
-    background-color: #a377ff;
+    background-color: rgb(98, 54, 139);
 }
 
 #button2:hover {
-    background-color: #ffe375;
+    background-color: #ffae00;
 }
 
 /****************************************************************/
@@ -157,6 +161,9 @@ body {
     outline: none;
     padding-left: 15px;
     background: transparent;
+    font-family: "Righteous";
+    color: #4d4d4d;
+
 }
 
 .search-icon {
@@ -169,14 +176,14 @@ body {
     margin-left: 10px;
 }
 
-
-
+/***************************** CSS FRUITS ***********************************/
 #fruits-gallery {
     display: flex;
-    flex-wrap: wrap;  /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os itens */
+    flex-wrap: wrap;  
+    justify-content: center; 
     gap: 20px;
     margin-top: 20px;
+    width: 100%;
 }
 
 .fruit-card {
@@ -214,8 +221,55 @@ body {
     
 }
 
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Estilos para os cards de personagens (pôster WANTED) */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+.close, .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.modal-close-btn {
+    position: static;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.modal-close-btn:hover, .close:hover {
+    opacity: 0.7;
+}
+
+/***************************** CSS CHARACTERS ***********************************/
 .character-card {
     display: flex;
     flex-direction: column;
