@@ -2,7 +2,7 @@
 
 console.log('main.js successfully loaded')
 
-async function searchFruits(name) {
+async function searchFruits(name) { 
     const url = `https://api.api-onepiece.com/v2/fruits/en`
     const response = await fetch(url)
     const data = await response.json()
@@ -31,99 +31,56 @@ async function fillFruits() {
         const fruitCard = document.createElement('div')
         fruitCard.classList.add('fruit-card')
 
-        if (item.filename.length > 41) {
-            const img = document.createElement('img')
-            img.src = item.filename
-            img.alt = item.name
-            fruitCard.appendChild(img)
-        } else {
-            const img = document.createElement('img')
-            img.src = './img/noImage.png'
-            fruitCard.appendChild(img)
-        }
+        const img = document.createElement('img')
+        img.src = item.filename.length > 41 ? item.filename : './img/noImage.png'
+        img.alt = item.name
+        fruitCard.appendChild(img)
 
-        if (!item.roman_name) {
-            const nameElement = document.createElement('h2')
-            nameElement.textContent = item.name
-            fruitCard.appendChild(nameElement)
-        } else {
-            const nameElement = document.createElement('h2')
-            nameElement.textContent = item.roman_name
-            fruitCard.appendChild(nameElement)
-        }
+        const nameElement = document.createElement('h2')
+        nameElement.textContent = item.roman_name || item.name
+        fruitCard.appendChild(nameElement)
+
+        fruitCard.addEventListener('click', function() {
+            fruitInfo(item)
+        })
 
         fruitsGallery.appendChild(fruitCard)
     })
 }
 
-function setupModal() {
-    const modal = document.getElementById('chosen-fruit')
-    if (!modal) return
+function fruitInfo(item) {
+    const fruitsGallery = document.getElementById('fruits-gallery')
+    fruitsGallery.replaceChildren()
 
-    const modalContent = document.createElement('div')
-    modalContent.classList.add('modal-content')
-
-    const closeButton = document.createElement('span')
-    closeButton.classList.add('close')
-    closeButton.textContent = '×'
+    const fruitDetail = document.createElement('div')
+    fruitDetail.classList.add('chosen-fruit')
+    fruitDetail.replaceChildren() // limpa antes
 
     const title = document.createElement('h2')
-    title.id = 'modal-title'
+    title.textContent = item.roman_name || item.name
 
-    const image = document.createElement('img')
-    image.id = 'modal-image'
-    image.alt = 'Fruit Image'
+    const img = document.createElement('img')
+    img.src = item.filename.length > 41 ? item.filename : './img/noImage.png'
+    img.alt = item.name || 'Unknown Fruit'
+
+    const name = document.createElement('h2')
+    name.textContent = item.name
 
     const description = document.createElement('p')
-    description.id = 'modal-description'
+    description.textContent = item.description 
 
-    const closeBtn = document.createElement('button')
-    closeBtn.classList.add('modal-close-btn')
-    closeBtn.textContent = 'Close'
+    const type = document.createElement('p')
+    type.textContent = item.type
 
-    closeButton.addEventListener('click', closeModal)
-    closeBtn.addEventListener('click', closeModal)
-    window.addEventListener('click', function (event) {
-        if (event.target === modal) {
-            closeModal()
-        }
-    })
+    fruitDetail.appendChild(title)
+    fruitDetail.appendChild(img)
+    fruitDetail.appendChild(name)
+    fruitDetail.appendChild(description)
+    fruitDetail.appendChild(type)
 
-    modalContent.appendChild(closeButton)
-    modalContent.appendChild(title)
-    modalContent.appendChild(image)
-    modalContent.appendChild(description)
-    modalContent.appendChild(closeBtn)
-
-    modal.replaceChildren(modalContent)
+    fruitsGallery.appendChild(fruitDetail)
 }
 
-function openFruitModal(fruit) {
-    const modal = document.getElementById('chosen-fruit')
-
-    if (!modal.firstChild) setupModal()
-
-    document.getElementById('modal-title').textContent = fruit.roman_name || fruit.name
-    document.getElementById('modal-image').src = fruit.filename.length > 41 ? fruit.filename : './img/noImage.png'
-    document.getElementById('modal-description').textContent = fruit.description || "Description not found"
-
-    modal.style.display = 'flex'
-}
-
-function closeModal() {
-    const modal = document.getElementById('chosen-fruit')
-    if (modal) {
-        modal.style.display = 'none'
-    }
-}
-
-setupModal()
-document.getElementById('icon1').addEventListener('click', fillFruits)
-document.getElementById('search-fruit').addEventListener('keydown', function(event) {
-    if (event.key === "Enter") {
-        fillFruits()
-    }
-})
 
 /***************************************************************************************/
 
@@ -136,14 +93,18 @@ async function searchCharacters(name) {
     dataC.forEach(function (item) {
         if (item.name.includes(name)) {
             characterList.push(item)
+
+            console.log(item);
         }
     })
 
     console.log(characterList)
+    
     return characterList
 }
 
 async function fillCharacters() {
+
     console.log('fillCharacters function called')
     const character = document.getElementById('search-characters').value
     const searchCharacter = await searchCharacters(character)
@@ -154,13 +115,33 @@ async function fillCharacters() {
     searchCharacter.forEach(function (item) {
 
         const characterCard = document.createElement('div')
-        characterCard.id = 'character-card'
+        characterCard.classList.add('character-card')
+
+        const wantedImg = document.createElement('img')
+        wantedImg.src = './img/wanted.png'
 
         const nameElement = document.createElement('h2')
         nameElement.textContent = item.name
 
+        const divBounty = document.createElement('div')
+        divBounty.classList.add('bounty-box')
+
+        const berry = document.createElement('img')
+        berry.src = './img/berry.png'
+        
+        const characterBounty = document.createElement('span')
+        characterBounty.textContent = item.bounty
+
+        
+        characterCard.appendChild(wantedImg)
         characterCard.appendChild(nameElement)
+        divBounty.appendChild(berry)
+        divBounty.appendChild(characterBounty)
+        characterCard.appendChild(divBounty)
         charactersGallery.appendChild(characterCard)
+        
+        console.log(item);
+        
     })
 }
 
