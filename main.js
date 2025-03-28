@@ -54,29 +54,40 @@ function fruitInfo(item) {
 
     const fruitDetail = document.createElement('div')
     fruitDetail.classList.add('chosen-fruit')
-    fruitDetail.replaceChildren() // limpa antes
+    fruitDetail.replaceChildren()
 
-    const title = document.createElement('h2')
-    title.textContent = item.roman_name || item.name
+    const divImg = document.createElement('div')
+    divImg.className = 'div-img'
+    const divInfo = document.createElement('div')
+    divInfo.className = 'fruit-info'
 
     const img = document.createElement('img')
     img.src = item.filename.length > 41 ? item.filename : './img/noImage.png'
     img.alt = item.name || 'Unknown Fruit'
 
-    const name = document.createElement('h2')
-    name.textContent = item.name
+    const title = document.createElement('h2')
+    title.textContent = item.roman_name || item.name
 
     const description = document.createElement('p')
+    description.className = 'fruit-description'
     description.textContent = item.description 
 
+    const fruitType = document.createElement('div')
+    fruitType.className = 'fruit-type'
+    const typeText = document.createElement('p')
+    typeText.textContent = 'Type:  '
     const type = document.createElement('p')
     type.textContent = item.type
+    
+    divImg.appendChild(img)
+    fruitDetail.appendChild(divImg)
 
-    fruitDetail.appendChild(title)
-    fruitDetail.appendChild(img)
-    fruitDetail.appendChild(name)
-    fruitDetail.appendChild(description)
-    fruitDetail.appendChild(type)
+    divInfo.appendChild(title)
+    divInfo.appendChild(description)
+    fruitType.appendChild(typeText)
+    fruitType.appendChild(type)
+    divInfo.appendChild(fruitType)
+    fruitDetail.appendChild(divInfo)
 
     fruitsGallery.appendChild(fruitDetail)
 }
