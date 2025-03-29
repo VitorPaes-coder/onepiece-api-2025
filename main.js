@@ -104,9 +104,7 @@ async function searchCharacters(name) {
     dataC.forEach(function (item) {
         if (item.name.includes(name)) {
             characterList.push(item)
-
-            console.log(item);
-        }
+        } 
     })
 
     console.log(characterList)
@@ -137,8 +135,11 @@ async function fillCharacters() {
         const divBounty = document.createElement('div')
         divBounty.classList.add('bounty-box')
 
-        const berry = document.createElement('img')
-        berry.src = './img/berry.png'
+        if(item.bounty.length >= 1){
+            const berry = document.createElement('img')
+            berry.src = './img/berry.png'
+            divBounty.appendChild(berry)
+        }
         
         const characterBounty = document.createElement('span')
         characterBounty.textContent = item.bounty
@@ -146,11 +147,10 @@ async function fillCharacters() {
         
         characterCard.appendChild(wantedImg)
         characterCard.appendChild(nameElement)
-        divBounty.appendChild(berry)
+        
         divBounty.appendChild(characterBounty)
         characterCard.appendChild(divBounty)
         charactersGallery.appendChild(characterCard)
-        
         console.log(item);
         
     })
