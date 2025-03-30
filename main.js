@@ -3,14 +3,24 @@
 console.log('main.js successfully loaded')
 
 async function searchFruits(name) { 
+    if (!name.trim()) {
+        alert('Não mande um nome vazio!')
+        return []
+    }
+
     const url = `https://api.api-onepiece.com/v2/fruits/en`
     const response = await fetch(url)
     const data = await response.json()
 
     const fruitList = []
+    const lowerCaseName = name.toLowerCase()
+
     data.forEach(function (item) {
-        if ((item.roman_name && item.roman_name.includes(name)) || 
-            (item.name && item.name.includes(name))) {
+        if (
+            (item.roman_name && item.roman_name.toLowerCase().includes(lowerCaseName)) ||
+            (item.name && item.name.toLowerCase().includes(lowerCaseName)) ||
+            (item.type && item.type.toLowerCase().includes(lowerCaseName))
+        ) {
             fruitList.push(item)
         }
     })
@@ -114,7 +124,6 @@ async function searchCharacters(name) {
 
 async function fillCharacters() {
 
-    console.log('fillCharacters function called')
     const character = document.getElementById('search-characters').value
     const searchCharacter = await searchCharacters(character)
     const charactersGallery = document.getElementById('characters-gallery')
