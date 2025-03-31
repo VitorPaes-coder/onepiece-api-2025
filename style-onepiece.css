@@ -353,7 +353,7 @@ body {
 
 .character-card h2 {
     width: 100%;
-    font-size: 48px;
+    font-size: 42px;
     text-align: center;
     color: black;
     text-transform: capitalize;
@@ -427,7 +427,7 @@ body {
 }
 
 .name-traits h2 {
-    font-size: 65px;
+    font-size: 70px;
     text-transform: uppercase;
 }
 

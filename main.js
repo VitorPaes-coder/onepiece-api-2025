@@ -105,20 +105,29 @@ function fruitInfo(item) {
 
 /***************************************************************************************/
 
-async function searchCharacters(name) {
+async function searchCharacters(query) {
+    if (!query.trim()) {
+        alert('Não mande um nome vazio!')
+        return []
+    }
+
     const urlC = `https://api.api-onepiece.com/v2/characters/en`
     const responseC = await fetch(urlC)
     const dataC = await responseC.json()
 
     const characterList = []
+    const name = query.toLowerCase()
+
     dataC.forEach(function (item) {
-        if (item.name.includes(name)) {
+
+        const characterName = item.name.toLowerCase()
+        
+        if (characterName.includes(name)) {
             characterList.push(item)
-        } 
+        }
     })
 
     console.log(characterList)
-    
     return characterList
 }
 
