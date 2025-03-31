@@ -160,10 +160,129 @@ async function fillCharacters() {
         divBounty.appendChild(characterBounty)
         characterCard.appendChild(divBounty)
         charactersGallery.appendChild(characterCard)
-        console.log(item);
         
+        characterCard.addEventListener('click', function() {
+            characterInfo(item)
+        })
     })
 }
+
+function characterInfo(item) {
+    const charactersGallery = document.getElementById('characters-gallery')
+    charactersGallery.replaceChildren()
+
+    const characterPoster = document.createElement('div')
+    characterPoster.classList.add('chosen-character')
+    characterPoster.replaceChildren()
+
+    const leftDecor = document.createElement('div')
+    leftDecor.id = 'left-decor'
+    const decorImg1 = document.createElement('img')
+    decorImg1.src = './img/decoracao.png'
+    leftDecor.appendChild(decorImg1)
+
+    const divContent = document.createElement('div')
+    divContent.className = 'div-content'
+
+    const nameTraits = document.createElement('div')
+    nameTraits.className = 'name-traits'
+
+    const name = document.createElement('h2')
+    name.textContent = item.name
+
+    const traits = document.createElement('div')
+    traits.className = 'traits'
+
+    const sizeDiv = document.createElement('div')
+    sizeDiv.className = 'size-box'
+    const sizeText = document.createElement('p')
+    sizeText.textContent = 'Size:'
+    const size = document.createElement('p')
+    size.textContent = item.size
+
+    const ageDiv = document.createElement('div')
+    ageDiv.className = 'age-box'
+    const ageText = document.createElement('p')
+    ageText.textContent = 'Age:'
+    const age = document.createElement('p')
+    age.textContent = item.age
+
+    const statusDiv = document.createElement('div')
+    statusDiv.className = 'status-box'
+    const statusText = document.createElement('p')
+    statusText.textContent = 'Status:'
+    const status = document.createElement('p')
+    status.textContent = item.status
+
+    let bountyDiv = null
+    if (item.bounty) {
+        bountyDiv = document.createElement('div')
+        bountyDiv.className = 'box-bounty'
+        const bountyText = document.createElement('p')
+        bountyText.textContent = 'Bounty:'
+        bountyText.className = 'attribute-text'
+        const bounty = document.createElement('p')
+        bounty.textContent = item.bounty
+
+        bountyDiv.appendChild(bountyText)
+        bountyDiv.appendChild(bounty)
+    }
+
+    const groupDiv = document.createElement('div')
+    groupDiv.className = 'group-box'
+    const groupText = document.createElement('p')
+    groupText.textContent = 'Group:'
+    groupText.className = 'attribute-text'
+    const group = document.createElement('p')
+    group.textContent = item.crew.name
+
+    groupDiv.appendChild(groupText)
+    groupDiv.appendChild(group)
+
+    let jobDiv = null
+    if (item.job) {
+        jobDiv = document.createElement('div')
+        jobDiv.className = 'job-box'
+        const jobText = document.createElement('p')
+        jobText.textContent = 'Job:'
+        jobText.className = 'attribute-text'
+        const job = document.createElement('p')
+        job.textContent = item.job
+
+        jobDiv.appendChild(jobText)
+        jobDiv.appendChild(job)
+    }
+
+    const rightDecor = document.createElement('div')
+    rightDecor.id = 'right-decor'
+    const rightImg1 = document.createElement('img')
+    rightImg1.src = './img/decoracao2.png'
+    rightDecor.appendChild(rightImg1)
+
+    sizeDiv.appendChild(sizeText)
+    sizeDiv.appendChild(size)
+    ageDiv.appendChild(ageText)
+    ageDiv.appendChild(age)
+    statusDiv.appendChild(statusText)
+    statusDiv.appendChild(status)
+    traits.appendChild(sizeDiv)
+    traits.appendChild(ageDiv)
+    traits.appendChild(statusDiv)
+
+    nameTraits.appendChild(name)
+    nameTraits.appendChild(traits)
+
+    divContent.appendChild(nameTraits)
+    if (bountyDiv) divContent.appendChild(bountyDiv)
+    divContent.appendChild(groupDiv)
+    if (jobDiv) divContent.appendChild(jobDiv)
+
+    characterPoster.appendChild(leftDecor)
+    characterPoster.appendChild(divContent)
+    characterPoster.appendChild(rightDecor)
+    charactersGallery.appendChild(characterPoster)
+}
+
 
 function setupEvents(buttonId, inputId, callback) {
     const button = document.getElementById(buttonId)
