@@ -1,6 +1,6 @@
 'use strict'
 
-console.log('main.js successfully loaded')
+/***************************************************JS-DEVILDRUITS********************************************************/
 
 async function searchFruits(name) { 
     if (!name.trim()) {
@@ -19,13 +19,12 @@ async function searchFruits(name) {
         if (
             (item.roman_name && item.roman_name.toLowerCase().includes(lowerCaseName)) ||
             (item.name && item.name.toLowerCase().includes(lowerCaseName)) ||
-            (item.type && item.type.toLowerCase().includes(lowerCaseName))
+            (item.type && item.type.toLowerCase() == lowerCaseName)
         ) {
             fruitList.push(item)
         }
     })
 
-    console.log(fruitList)
     return fruitList
 }
 
@@ -103,7 +102,7 @@ function fruitInfo(item) {
 }
 
 
-/***************************************************************************************/
+/*****************************************JS-CHARACTERS**********************************************/
 
 async function searchCharacters(query) {
     if (!query.trim()) {
@@ -127,7 +126,6 @@ async function searchCharacters(query) {
         }
     })
 
-    console.log(characterList)
     return characterList
 }
 
@@ -292,6 +290,7 @@ function characterInfo(item) {
     charactersGallery.appendChild(characterPoster)
 }
 
+/**********************************************JS-GLOBAL************************************************/
 
 function setupEvents(buttonId, inputId, callback) {
     const button = document.getElementById(buttonId)
@@ -311,15 +310,12 @@ function setupEvents(buttonId, inputId, callback) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM fully loaded and parsed')
 
     if (document.getElementById('icon1')) {
-        console.log('Fruits page detected')
         setupEvents('icon1', 'search-fruit', fillFruits)
     }
 
     if (document.getElementById('icon2')) {
-        console.log('Characters page detected')
         setupEvents('icon2', 'search-characters', fillCharacters)
     }
 })
